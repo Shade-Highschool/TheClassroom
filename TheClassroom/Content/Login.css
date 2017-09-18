@@ -1,0 +1,26 @@
+﻿.loginForm {
+    background-color: rgba(255,255,255,0.8);
+    padding: 15px 50px 20px 50px;
+    text-align:center;
+    font-size:15px;
+}
+.form-horizontal .form-group{
+    width:50%;
+    margin: 15px auto;
+}
+input[type="checkbox"]{
+    margin:2px 0 0 0;
+}
+.checkbox label
+{
+    padding-left:0;
+}
+h4{
+    font-weight:bold;
+}
+input[type="submit"]{
+    padding:13px 40px;
+}
+.validation-summary-errors ul {
+    margin: 0px;
+}

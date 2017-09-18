@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron text-center">
+    <img id="logo" src="@Url.Content("~/favicon.png")" width="150" height="150"><br />
+    <div class="container">
+
+        <nav class="navbar">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#"><span class="glyphicon glyphicon-heart"></span> O projektu</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li><a href="@Url.Action("Register", "Account", new { })"><span class="glyphicon glyphicon-user"></span> Registrace</a></li>
+                    <li><a href="@Url.Action("Login", "Account", new { }  )"><span class="glyphicon glyphicon-log-in"></span> Přihlášení</a></li>
+                </ul>
+            </div>
+        </nav>
+
+            <div class="oProjektu">
+            <h1 id="title">O projektu</h1>
+            <div id="separator"></div>
+            <p id="textOprojektu">
+                Tato bezplatná webová aplikace umožňuje spravovat veškterou administrativu školního prostředí pro učitele i studenty.
+                <br /><br />UČITELÉ<br />
+                Pro učitele je zde připravený systém, zahrnující základní nástroje, jakými jsou evidence školní docházky studentů (třídní kniha),
+                správa studentského prospěchu, kde je velice přehledně vyobrazen prospěch žáka a samozřejmě také evidence postihů počínaje udělováním
+                poznámek až po důtky všeho druhu. Dálšími nástroji, které jistě oceníte, jsou například zadávání domácích úkolů
+                (stačí jen pár kliknutí a studenti ihned budou informováni), dále také udělování pochval, posílání zpráv, ať se jedná o učitele, či studenta a nakonec
+                na Vás čeká nástroj na zapisování změn v rozvrhu.
+                <br /><br />STUDENTI<br />
+                Pro studenty je zde velice přehledné prostředí, kde budou mít přehled o své celkové kariéře na škole. Automatická kalkulačka Vám bude zobrazovat průměr,
+                vycházející z Vašeho dosavadního prospěchu u každého předmětu. Váš rozvrh zde bude vyobrazen tak detailně, jak jen to jde a v případě, že v rozvrhu nastanou změny,
+                budete upozorněni. Stačí jen prozkoumat...
+            </p>
+
+            </div>
+
+        </div>
+</div>
