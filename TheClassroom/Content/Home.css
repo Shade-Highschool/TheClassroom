@@ -2,75 +2,89 @@
     font-family: GOTHIC;
     src: url(../fonts/GOTHIC.TTF);
 }
-html,body{
-    height: 100%;
-    margin:0;
-    padding:0;
-}
 
-body{
-	min-width: 500px;
-	font-size: 12px;
-    font-family: GOTHIC;
-	background-color: white;
-	background: url("../Image/background.jpg") no-repeat center center fixed;
-  	background-size: cover;
-	overflow: hidden;
-}
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        min-width:300px;
+        min-height: 300px;
+    }
+    .row {margin:0px;}
 
-#logo{
-	margin-bottom: 20px;
-}
+    body {
+        font-size: 12px;
+        font-family: GOTHIC;
+        background-color: white;
+        background: url("../Image/background.jpg") no-repeat center center fixed;
+        background-size: cover;
+    }
 
-.nav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: white;
-    display: inline;
-    transition: 0.3s;
-}
+    #logo {
+        margin-bottom: 20px;
+    }
 
-.nav a:hover{
-    color: rgb(255,123,123);
-}
-.navbar {
-    margin-bottom:0;
-}
-.container-fluid{padding-left:0;}
+    .nav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: white;
+        display: inline;
+        transition: 0.3s;
+    }
 
-#separator {
-    background-color: black;
-    width: 50%;
-    height: 1px;
-    margin: auto;
-    margin-bottom: 20px;
-}
-#title{
-	font-size: 32px;
-	color: black;
-}
-.jumbotron{
-    background-color: transparent !important;
+        .nav a:hover {
+            color: rgb(255,123,123);
+        }
 
-}
-.active a {
-    color: rgb(255,123,123);
-    background-color: #eee;
-    cursor: default;
-}
-.vertical-center {
-    min-height: 100%; /* Fallback for browsers do NOT support vh unit */
-    min-height: 100vh; /* These two lines are counted as one :-)       */
-    display: flex;
-    align-items: center;
-}
-.middle-center {
-    margin: 0 auto;
-}
-#textOprojektu{font-size:16px;}
-.container .oProjektu{
-	background-color: rgba(255,255,255,0.8);
-    padding:5px 50px 20px 50px;
-}
+    .navbar {
+        margin-bottom: 0;
+    }
+
+    .container-fluid {
+        padding-left: 0;
+    }
+
+    #separator {
+        background-color: black;
+        width: 50%;
+        height: 1px;
+        margin: auto;
+        margin-bottom: 20px;
+    }
+
+    #title {
+        font-size: 32px;
+        color: black;
+    }
+
+    .jumbotron {
+        background-color: transparent !important;
+    }
+
+    .active a {
+        color: rgb(255,123,123);
+        background-color: #eee;
+        cursor: default;
+    }
+
+    .vertical-center {
+        min-height: 100%; /* Fallback for browsers do NOT support vh unit */
+        min-height: 100vh; /* These two lines are counted as one :-)       */
+        display: flex;
+        align-items: center;
+    }
+
+    .middle-center {
+        margin: 0 auto;
+    }
+
+    #textOprojektu {
+        font-size: 16px;
+    }
+
+    .container .oProjektu {
+        background-color: rgba(255,255,255,0.8);
+        padding: 5px 50px 20px 50px;
+    }
 
