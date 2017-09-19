@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using TheClassroom.Models;
+using System.Net.Mail;
 
 namespace TheClassroom
 {
@@ -19,7 +20,28 @@ namespace TheClassroom
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+
+            smtpClient.Credentials = new System.Net.NetworkCredential("shade.it.stuff@gmail.com", "ZD9geu5aW0mW1sO1hE5");
+            smtpClient.UseDefaultCredentials = false;
+            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtpClient.EnableSsl = true;
+            MailMessage mail = new MailMessage();
+
+            //Setting From , To and CC
+            mail.From = new MailAddress("shade.it.stuff@gmail.com", "Project Classroom");
+            mail.To.Add(new MailAddress(message.Destination));
+            mail.IsBodyHtml = true;
+            mail.Body = message.Body;
+
+            try
+            {
+                return smtpClient.SendMailAsync(mail);
+            }
+            catch
+            {
+                return Task.FromResult(0);
+            }
         }
     }
 
@@ -52,6 +74,19 @@ namespace TheClassroom
             manager.UserLockoutEnabledByDefault = true;
             manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
             manager.MaxFailedAccessAttemptsBeforeLockout = 5;
+
+            manager.EmailService = new EmailService();
+
+            var dataProtectionProvider = options.DataProtectionProvider;
+            if (dataProtectionProvider != null)
+            {
+                manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser, int>(dataProtectionProvider.Create("TheClassroom"))
+                {
+                    //Code for email confirmation and reset password life time
+                    TokenLifespan = TimeSpan.FromHours(6)
+                };
+            }
+
             return manager;
         }
     }

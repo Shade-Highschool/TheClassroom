@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using TheClassroom.Models;
+using Microsoft.Owin.Security.DataProtection;
 
 namespace TheClassroom.Controllers
 {
@@ -114,10 +115,12 @@ namespace TheClassroom.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+
+
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                      var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                      await UserManager.SendEmailAsync(user.Id, "Potvrzení účtu", "Prosím potvrďte váš účet zde: <a href=\"" + callbackUrl + "\">Potvrzení účtu</a>");
 
