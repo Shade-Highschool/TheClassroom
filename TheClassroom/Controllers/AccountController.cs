@@ -144,11 +144,29 @@ namespace TheClassroom.Controllers
         [AllowAnonymous]
         public ActionResult EmailSent(string email)
         {
-            if (email == null) //Secure
+            var user = UserManager.FindByEmail(email);
+            if (user == null) //Secure
             {
                 return View("Error");
             }
+            ViewBag.Email = email;
             return View();
+        }
+        [AllowAnonymous]
+        public ActionResult ResendVerifyEmail(string email)
+        {
+            var user = UserManager.FindByEmail(email);
+
+            if (user == null)
+                return View("Error");
+            if (user.EmailConfirmed)
+                return View();
+            // Email send code
+            string code = UserManager.GenerateEmailConfirmationToken(user.Id);
+            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+            UserManager.SendEmail(user.Id, "Potvrzení účtu", "Prosím potvrďte váš účet zde: <a href=\"" + callbackUrl + "\">Potvrzení účtu</a>");
+
+            return RedirectToAction("EmailSent", "Account", new { Email = user.Email });
         }
 
         //
