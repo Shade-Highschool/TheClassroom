@@ -12,6 +12,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using TheClassroom.Models;
 using System.Net.Mail;
+using System.Net;
 
 namespace TheClassroom
 {
@@ -19,18 +20,19 @@ namespace TheClassroom
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
+           //Email service
             SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
 
-            smtpClient.Credentials = new System.Net.NetworkCredential("shade.it.stuff@gmail.com", "ZD9geu5aW0mW1sO1hE5");
             smtpClient.UseDefaultCredentials = false;
             smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtpClient.EnableSsl = true;
+            smtpClient.Credentials = new NetworkCredential("shade.it.stuff@gmail.com", "ZD9geu5aW0mW1sO1hE5");
             MailMessage mail = new MailMessage();
 
-            //Setting From , To and CC
+            //Mail setting
             mail.From = new MailAddress("shade.it.stuff@gmail.com", "Project Classroom");
             mail.To.Add(new MailAddress(message.Destination));
+            mail.Subject = message.Subject;
             mail.IsBodyHtml = true;
             mail.Body = message.Body;
 
@@ -75,8 +77,10 @@ namespace TheClassroom
             manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
             manager.MaxFailedAccessAttemptsBeforeLockout = 5;
 
-            manager.EmailService = new EmailService();
+            manager.EmailService = new EmailService(); //add email service
 
+
+            //Create token for email confirm
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {

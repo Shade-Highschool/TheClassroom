@@ -116,20 +116,18 @@ namespace TheClassroom.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
 
-
-                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    //Email send code
+                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                      var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                      await UserManager.SendEmailAsync(user.Id, "Potvrzení účtu", "Prosím potvrďte váš účet zde: <a href=\"" + callbackUrl + "\">Potvrzení účtu</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("EmailSent", "Account", new { Email = user.Email });
                 }
                 AddErrors(result);
             }
 
-            // If we got this far, something failed, redisplay form
+            // Something failed, redisplay
             return View(model);
         }
 
@@ -143,17 +141,27 @@ namespace TheClassroom.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [AllowAnonymous]
+        public ActionResult EmailSent(string email)
+        {
+            if (email == null) //Secure
+            {
+                return View("Error");
+            }
+            return View();
+        }
+
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
-        public async Task<ActionResult> ConfirmEmail(int userId, string code)
+        public async Task<ActionResult> ConfirmEmail(int userId = -1, string code = null)
         {
-            if (code == null) //userId == null
+            if (userId == -1|| code == null) //Secure
             {
                 return View("Error");
             }
             var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            return View(result.Succeeded ? "ConfirmEmail" : "Error"); //Potvrď
         }
 
         /* //
