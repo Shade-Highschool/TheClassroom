@@ -142,7 +142,7 @@ namespace TheClassroom.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult EmailSent(string email)
+        public ActionResult EmailSent(string email = "")
         {
             var user = UserManager.FindByEmail(email);
             if (user == null) //Secure
@@ -153,7 +153,7 @@ namespace TheClassroom.Controllers
             return View();
         }
         [AllowAnonymous]
-        public ActionResult ResendVerifyEmail(string email)
+        public ActionResult ResendVerifyEmail(string email = "")
         {
             var user = UserManager.FindByEmail(email);
 
