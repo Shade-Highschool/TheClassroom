@@ -26,11 +26,11 @@ namespace TheClassroom
             smtpClient.UseDefaultCredentials = false;
             smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtpClient.EnableSsl = true;
-            smtpClient.Credentials = new NetworkCredential("shade.it.stuff@gmail.com", "ZD9geu5aW0mW1sO1hE5");
+            smtpClient.Credentials = new NetworkCredential("projecttheclassroom@gmail.com", "classroom");
             MailMessage mail = new MailMessage();
 
             //Mail setting
-            mail.From = new MailAddress("shade.it.stuff@gmail.com", "Project Classroom");
+            mail.From = new MailAddress("projecttheclassroom@gmail.com", "Project Classroom");
             mail.To.Add(new MailAddress(message.Destination));
             mail.Subject = message.Subject;
             mail.IsBodyHtml = true;

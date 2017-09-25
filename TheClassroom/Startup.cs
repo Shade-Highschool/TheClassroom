@@ -32,6 +32,7 @@ namespace TheClassroom
                 var user = new ApplicationUser();
                 user.UserName = "shade.it.stuff@gmail.com";
                 user.Email = "shade.it.stuff@gmail.com";
+                user.EmailConfirmed = true;
 
                 string userPWD = "admin123";
 
