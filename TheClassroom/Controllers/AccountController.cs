@@ -74,6 +74,15 @@ namespace TheClassroom.Controllers
                 return View(model);
             }
 
+            var user = UserManager.FindByEmail(model.Email);
+            if (user != null)
+            {
+                if (!UserManager.IsEmailConfirmed(user.Id)) //neopravený bug
+                {
+                    ModelState.AddModelError("", "Váš účet není ověřený. Pro znovu zaslání emailu klikněte <a href=\"/Account/EmailSent?email=" + model.Email + "\">Zde</a>");
+                    return View(model);
+                }
+            }
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
@@ -83,8 +92,6 @@ namespace TheClassroom.Controllers
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Přihlášení se nezdařilo");
